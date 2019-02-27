@@ -101,7 +101,7 @@ You should next stuff on your machine:
 
   - to get overlaps
     ```
-     /?interviewers_and=[1,2]&candidates_and=[3]
+     /overlaps?interviewers_and=[1,2]&candidates_and=[3]
     ```
     The requst will return time slots when interviews with id 1, 2 and candidate 3 can talk ALL together (EVERYONE at the same time)
 
