@@ -1,0 +1,44 @@
+{
+  "name": "scheduler-api",
+  "author": "Vitalii Znak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "babel-node": "babel-node",
+    "start": "run.env -p .env.local npm run babel-node -- ./src/index --verbose",
+    "start:dev": " BLUEBIRD_LONG_STACK_TRACES=1 BLUEBIRD_WARNINGS=1 run.env -p .env.local  nodemon $DEBUGGER --exec npm run babel-node -- ./src/index --verbose",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db-drop": "run.env -p .env.local npm run babel-node -- ./scripts/db_drop --verbose",
+    "db-populate": "npm run db-initialize && run.env -p .env.local npm run babel-node -- ./scripts/db_populate --verbose",
+    "db-initialize": "run.env -p .env.local npm run babel-node -- ./scripts/db_initialize --verbose"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "celebrate": "^9.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.3.0",
+    "pg": "^7.8.1",
+    "pg-escape": "^0.2.0",
+    "pg-native": "^3.0.0",
+    "run.env": "^1.1.0",
+    "sqlstring": "^2.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.10"
+  }
+}
