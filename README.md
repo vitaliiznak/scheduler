@@ -40,7 +40,7 @@ You should next stuff on your machine:
 
   - to create a user
 
-    ```
+    ```javascript
         fetch("http://localhost:3030/auth/register", {
           method: "POST",
           headers: {
@@ -53,9 +53,9 @@ You should next stuff on your machine:
           })
         })
     ```
-  - user a user slot
+  - to create a time slot
 
-    ```
+    ```javascript
        fetch('http://localhost:3030/slots', {
           method: 'POST',
           headers: {
@@ -106,3 +106,31 @@ You should next stuff on your machine:
     ```
     The requst will return time slots when interviews with id 1, 2 and candidate 3 can talk ALL together (EVERYONE at the same time)
 
+
+## Implementation details
+
+In order to found time overlaps,SQL query is dynamically are generated and it is similar to this one.
+I didn't manage to do a profiling, It could be optimized
+
+```sql
+SELECT  tstzrange(slots_of_creator_1.time_range * slots_of_creator_3.time_range * slots_of_creator_4.time_range) AS "time_intersection", * FROM  INNER JOIN (SELECT
+          slot.id, slot.time_range, slot.creator, "user".type as creator_type
+          FROM slot
+          LEFT JOIN "user" ON "user".id = slot.creator
+              WHERE "user".type='INTERVIEWER'
+              AND creator = 1 )
+              AS slots_of_creator_1 ON TRUE, INNER JOIN (SELECT
+          slot.id, slot.time_range, slot.creator, "user".type as creator_type
+          FROM slot
+          LEFT JOIN "user" ON "user".id = slot.creator
+              WHERE "user".type='INTERVIEWER'
+              AND creator = 3 )
+              AS slots_of_creator_3 ON TRUE, INNER JOIN (SELECT
+          slot.id, slot.time_range, slot.creator, "user".type as creator_type
+          FROM slot
+          LEFT JOIN "user" ON "user".id = slot.creator
+              WHERE "user".type='CANDIDATE'
+              AND creator = 4 )
+              AS slots_of_creator_4 ON TRUE
+
+```
