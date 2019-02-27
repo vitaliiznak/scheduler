@@ -87,13 +87,14 @@ You should next stuff on your machine:
         })
     ```
 
+  GET REQUESTS, they do not require authorization token
     - to get all slots
     ```
      /slots
      /slots/:id
     ```
 
-    - TO GET ALL USERS
+    - get all users
     ```
      /users
      /users/:id
