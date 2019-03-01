@@ -36,7 +36,7 @@ You should next stuff on your machine:
   The app will start on port `3030` you can change it on `.env.local`
 
   ## Usage example
-  Please check `./scripts/db-populate` file for as an example
+  Please check `./scripts/simulate` file for as an example
 
   - to create a user
 
